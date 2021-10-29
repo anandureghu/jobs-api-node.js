@@ -6,8 +6,7 @@ const authenticationMiddleware = (req, res) => {
         return res.status(401).json({sucess: false, "msg": "Unauthorized"});
     }
     const token = authHeader.split(" ")[1];
-    const isValid = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(isValid);
+    const user = jwt.verify(token, process.env.JWT_SECRET);
 }
 
 module.exports = authenticationMiddleware;
