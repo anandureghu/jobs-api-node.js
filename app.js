@@ -11,6 +11,7 @@ const connectDB = require('./db/connect');
 // Middleware importing
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const notFoundMiddleware = require("./middleware/not-found");
+const authenticationMiddleware = require('./middleware/auth');
 
 // MIddleware to access Json BODY
 app.use(express.json());
@@ -22,7 +23,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/jobs", jobsRouter);
+app.use("/api/v1/jobs", authenticationMiddleware, jobsRouter);
 
 // Using middlewares
 app.use(errorHandlerMiddleware);
