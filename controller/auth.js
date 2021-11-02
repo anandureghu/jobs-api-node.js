@@ -36,6 +36,7 @@ const login = async (req, res) =>{
         }
 
         const token = user.createToken();
+        req.headers.Authorization = `Bearer ${token}`;
 
         res.status(200).json({success: true, msg: "Logged In", user: user.username, token});
     } catch (error) {
